@@ -1,0 +1,9 @@
+<%= div_for list do %>
+    <p>
+        <strong>
+            Posted <%= time_ago_in_words(list.created_at) %> ago
+        </strong>
+        <br/>
+        <%= list.title %>
+    </p>
+<% end %>

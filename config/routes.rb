@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  resources :users do
     devise_for :users 
     resources :lists, only: [:create, :edit, :destroy]
 
-  end
     
 
   root to: 'home#index'

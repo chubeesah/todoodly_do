@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, :only => [:destroy]
+  before_filter :authenticate_user!
 
   def new
     @user = User.new

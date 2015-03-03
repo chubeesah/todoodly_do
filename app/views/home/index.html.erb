@@ -1,13 +1,25 @@
 
 <h1> Your Todoodly Do list! </h1>
 
+  <% if current_user %>
+    <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
+  <% else %>
   <%= link_to "Sign In", new_user_session_path %>
   <%= link_to "Sign Up", new_user_registration_path %>
+  <% end %>
 
-  <div class="list"> <h2> List </h2>
-    <div class="item"> Item </div>
-    <p><div class="all"> Show All </div> 
-    <div class="incomplete"> Show Incomplete</div>
+  <div id="list"> <h2> List </h2>
+    <div class="task"> <%= form_for [List.new], remote: true do |f| %>
+      <p><%= f.label :title, "New task" %></p>
+      <%= f.text_area :title %>
+      <%= f.submit "Add Task" %>
+      <% end %>
+    </div>
+    <div class="all_tasks"> <% List.all.each do |t| %>
+      <p><%= t.title %></p> 
+      <% end %>
+    </div> 
+    <div class="incomplete"><p> Show Incomplete </p></div>
     <div class="complete"> Show Complete</div>
     <div class="remove_complete"> Remove Completed </div></p>
   </div>
