@@ -10,7 +10,7 @@
   <%= link_to "Sign Up", new_user_registration_path %>
   <% end %>
 
-  <div id="list"> <h2> List </h2>
+  <div id="list"> <h2> List | Tasks:<%= "#{List.all.where(unfinished: true).count}" %> </h2>
     <div class="task"> <%= form_for [List.new] do |f| %>
       <%= f.text_area :title %>
       <%= f.submit "Add Task" %>
