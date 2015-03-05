@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+background-color: black;
+
+.todo {
+  float: left;
+  color: yellow;
+  font-family: cursive;
+  margin-top: -48px;
+  margin-left: 13px;
+  font-size: -webkit-xxx-large;
+ }

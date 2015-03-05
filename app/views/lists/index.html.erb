@@ -1,0 +1,35 @@
+
+ <h3 class= "head">Your</h3> <h1 class="todo">Todoodly Do</h1> <h3 class="head">list!</h3> 
+
+
+  <% if current_user %>
+    <%= current_user.username %>
+    <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+  <% else %>
+  <%= link_to "Sign In", new_user_session_path %>
+  <%= link_to "Sign Up", new_user_registration_path %>
+  <% end %>
+
+  <div id="list"> <h2> List </h2>
+    <div class="task"> <%= form_for [List.new] do |f| %>
+      <%= f.text_area :title %>
+      <%= f.submit "Add Task" %>
+      <% end %>
+    </div>
+    <div class="tasks"><% @lists.each do |t| %>
+      <p><%= t.title %></p>
+      <% if t.unfinished = true %> 
+        <%= button_to "Complete", list_finished_path(t), method: :post %>
+        <%= button_to "Delete", list_path(t), method: :delete, data: { confirm: "Are you sure you want to delete this task?" } %>
+      <% end %>
+    <% end %>
+    </div> 
+    <div class="all"><p><%= button_to "All", list_all_path(@lists), method: :get %></div>
+    <div class="incomplete"><%= button_to "Incomplete Only", root_path(@lists), method: :get %>
+      </div>
+    <div class="complete"> <%= button_to "Complete Only", list_show_finished_path(@lists), method: :get %></div>
+      <%= button_to "Trash Completed", list_trash_finished_path(@lists), method: :delete, data: { confirm: "Are you sure you want to trash your completed tasks?" } %></p></div>
+  </div>
+
+
+

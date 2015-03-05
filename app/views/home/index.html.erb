@@ -1,8 +1,10 @@
 
 <h1> Your Todoodly Do list! </h1>
 
+
   <% if current_user %>
-    <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
+    <%= current_user.username %>
+    <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
   <% else %>
   <%= link_to "Sign In", new_user_session_path %>
   <%= link_to "Sign Up", new_user_registration_path %>
@@ -15,13 +17,17 @@
       <%= f.submit "Add Task" %>
       <% end %>
     </div>
-    <div class="all_tasks"> <% List.all.each do |t| %>
-      <p><%= t.title %></p> 
+    <div class="tasks"><% List.all.each do |t| %>
+      <p><%= t.title %>
+         <%= t.finished %></p> 
       <% end %>
+      <%= link_to "Delete", list_path(@list), method: :delete %>
     </div> 
-    <div class="incomplete"><p> Show Incomplete </p></div>
-    <div class="complete"> Show Complete</div>
-    <div class="remove_complete"> Remove Completed </div></p>
+    <div class="all"><%= button_to "All", list_all_path(@lists), method: :get %></div>
+    <div class="incomplete"><%= button_to "Incomplete", list_unfinished_path(@lists), method: :get %>
+      </div>
+    <div class="complete"> <%= button_to "Complete", list_finished_path(@lists), method: :get %></div>
+    <div class="remove_complete"> <%= button_to "Trash Completed" %></div>
   </div>
 
 

@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-    devise_for :users 
-    resources :lists, only: [:create, :edit, :destroy]
+  devise_for :users 
+  resources :lists, only: [:create, :edit, :destroy]
 
-    
-
-  root to: 'home#index'
+  get "/all", to: "lists#all", as: "list_all"
+  get "/unfinished", to: "lists#unfinished", as: "list_unfinished"
+  post "/:id/finished/", to: "lists#finished", as: "list_finished"
+  get "/:id/finished/", to: "lists#show_finished", as: "list_show_finished"
+  delete "/:id/finished/", to: "lists#trash", as: "list_trash_finished"
+  root to: 'lists#unfinished'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
